@@ -10,8 +10,9 @@ public class Hooks extends Utils {
     BrowserSelector browserSelector = new BrowserSelector();
     LoadProp loadProp = new LoadProp();
 
-    String browser = loadProp.getExcelProperty(0,1,1);
-    String url = loadProp.getExcelProperty(0,3,1);
+
+    String browser = loadProp.getProperty("browser");
+    String url = loadProp.getProperty("url");
 
 
     @Before

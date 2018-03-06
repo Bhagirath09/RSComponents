@@ -16,7 +16,7 @@ public class HomePage extends Utils {
     private By _searchBox = By.id("searchTerm");
     private By _searchBoxButton = By.xpath("//div[@class=\"searchContainer\"]/form/i");
 
-    String searchProduct = loadProp.getExcelProperty(0,25,1);
+    String searchProduct = loadProp.getProperty("searchProduct");
 
     public void clickAllProducts(){
         myClick(_allProducts);

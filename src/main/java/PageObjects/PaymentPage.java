@@ -5,8 +5,6 @@ import RSComponents.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -26,15 +24,15 @@ public class PaymentPage extends Utils {
     private By _continueToOrderReview = By.xpath("//div[@class=\"checkoutNavigationContainer COM73\"]/span/a/span");
     private By _companyYourName = By.xpath("//div[@class=\"grayBorderBox\"]/div/div[3]/table/tbody/tr/td[2]/div/div/div/span/input");
 
-    public String cardNumber1 = loadProp.getExcelProperty(0,13,1);
-    public String cardNumber2 = loadProp.getExcelProperty(0,14,1);
-    public String cardNumber3 = loadProp.getExcelProperty(0,15,1);
-    public String cardNumber4 = loadProp.getExcelProperty(0,16,1);
-    public String cardName = loadProp.getExcelProperty(0,17,1);
-    public String cardHolderName = loadProp.getExcelProperty(0,18,1);
-    public String expiryDate = loadProp.getExcelProperty(0,19,1);
-    public String securityDate = loadProp.getExcelProperty(0,20,1);
-    public String firstName = loadProp.getExcelProperty(0,6,1);
+    public String cardNumber1 = loadProp.getProperty("card1");
+    public String cardNumber2 = loadProp.getProperty("card2");
+    public String cardNumber3 = loadProp.getProperty("card3");
+    public String cardNumber4 = loadProp.getProperty("card4");
+    public String cardName = loadProp.getProperty("cardName");
+    public String cardHolderName = loadProp.getProperty("cardHolderName");
+    public String expiryDate = loadProp.getProperty("expiryDate");
+    public String securityCode = loadProp.getProperty("securityCode");
+    public String firstName = loadProp.getProperty("firstName");
 
 
     public void fillPaymentCardDetails(){
@@ -53,7 +51,7 @@ public class PaymentPage extends Utils {
         myEnterText(_cardName, cardName);
         myEnterText(_cardHolderName, cardHolderName);
         myEnterText(_expiryDate, expiryDate);
-        myEnterText(_securityDate, securityDate);
+        myEnterText(_securityDate, securityCode);
 
     }
 

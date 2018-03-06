@@ -13,7 +13,7 @@ public class MyBasketPage extends Utils {
     private By _emailGuest = By.xpath("//div[@class=\"formField top10\"]/div/span/div[2]/input");
     private By _guestCheckout = By.id("guestCheckoutForm:guestCheckout");
 
-    String email = loadProp.getExcelProperty(0,4,1);
+    String email = loadProp.getProperty("email");
 
     public void clickCheckoutSecurely(){
 

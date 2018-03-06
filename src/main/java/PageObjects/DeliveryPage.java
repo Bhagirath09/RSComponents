@@ -21,14 +21,14 @@ public class DeliveryPage extends Utils {
     private By _continueToPayment = By.id("checkoutSecurelyBtn");
 
 
-    public String title = loadProp.getExcelProperty(0,5,1);
-    public String firstName = loadProp.getExcelProperty(0,6,1);
-    public String surname = loadProp.getExcelProperty(0,7,1);
-    public String teleNo = loadProp.getExcelProperty(0,8,1);
-    public String addressLine1 = loadProp.getExcelProperty(0,9,1);
-    public String town = loadProp.getExcelProperty(0,10,1);
-    public String county = loadProp.getExcelProperty(0,11,1);
-    public String postcode = loadProp.getExcelProperty(0,12,1);
+    public String title = loadProp.getProperty("title");
+    public String firstName = loadProp.getProperty("firstName");
+    public String surname = loadProp.getProperty("surname");
+    public String teleNo = loadProp.getProperty("telNo");
+    public String addressLine1 = loadProp.getProperty("addressline1");
+    public String town = loadProp.getProperty("town");
+    public String county = loadProp.getProperty("county");
+    public String postcode = loadProp.getProperty("postcode");
 
     public void fillOutDetailsOnDeliveryPage(){
 

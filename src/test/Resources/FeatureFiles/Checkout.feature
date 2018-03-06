@@ -45,7 +45,7 @@ Feature: Checkout
     And clicks on Batteries category
     Then user should be navigated to Batteries page
     And user should see different type of Batteries
-    When user puts two "20" HARWIN Coin Cell Batter Holder, RS Stock No "161-3707" in quantity
+    When user puts two "20" HARWIN Coin Cell Batter Holder, RS Stock No "161-3709" in quantity
     And clicks HARWIN Battery Holder Quantity Add button
     And clicks HARWIN Battery Holder View Basket
     Then user should be navigated to My basket page

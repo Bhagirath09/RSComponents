@@ -1,7 +1,6 @@
 package RSComponents;
 
 import PageObjects.*;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -10,8 +9,6 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
@@ -37,7 +34,7 @@ public class MyStepdefs extends Utils {
 
     String actual, actualQuantity, actualProduct, actualPayment, actualPrice;
     static String cardType, harwinQty, harwinRSNumber, sylvaniaLEDQty, sylvaniaLEDRSNumber, searchProduct,
-                  perPage;
+                  perPage, price;
 
 
         @Given("^user is on homepage$")
@@ -102,19 +99,15 @@ public class MyStepdefs extends Utils {
 
     }
 
-    @When("^user puts two \"([^\"]*)\" Sylvania ToLEDo, RS Stock No(\\d+)-(\\d+) in quantity$")
-    public void userPutsTwoSylvaniaToLEDoRSStockNoInQuantity()  {
-        // Write code here that turns the phrase above into concrete actions
-
-    }
-
 
     @When("^user puts two \"([^\"]*)\" Sylvania ToLEDo, RS Stock No \"([^\"]*)\" in quantity$")
     public void userPutsTwoSylvaniaToLEDoRSStockNoInQuantity(String sylvaniaLEDQty, String sylvaniaLEDRSNumber)  {
         // Write code here that turns the phrase above into concrete actions
         this.sylvaniaLEDQty = sylvaniaLEDQty;
         this.sylvaniaLEDRSNumber = sylvaniaLEDRSNumber;
-        ledTubeLights.addSylvaniaToLEDQuantity(sylvaniaLEDQty);
+        ledTubeLights.findProductLocator(sylvaniaLEDRSNumber);
+        price = ledTubeLights.productPrice();
+        ledTubeLights.enterProductQty(sylvaniaLEDQty);
     }
 
 
@@ -122,13 +115,13 @@ public class MyStepdefs extends Utils {
     @And("^clicks Add button$")
     public void clicksAddButton()  {
         // Write code here that turns the phrase above into concrete actions
-        ledTubeLights.clickSylvaniaToLEDButton();
+        ledTubeLights.clickAddQtyButton();
     }
 
     @And("^clicks Added View Basket$")
     public void clicksAddedViewBasket()  {
         // Write code here that turns the phrase above into concrete actions
-        ledTubeLights.clickSylvaniaToLEDAddedBasket();
+        ledTubeLights.clickAddedViewBasket();
     }
 
     @Then("^user should be navigated to My basket page$")
@@ -148,8 +141,7 @@ public class MyStepdefs extends Utils {
         Assert.assertTrue(actualQuantity.contains(sylvaniaLEDQty));
 
         actualPrice = driver.findElement(By.xpath("//table[@class=\"cartTable\"]/tbody/tr[3]/td[5]/div")).getText();
-        Assert.assertTrue(actualPrice.contains("£28.60"));
-
+        Assert.assertTrue(actualPrice.contains(String.valueOf(Float.valueOf(price)* Float.valueOf(sylvaniaLEDQty))));
         }
 
 
@@ -253,7 +245,7 @@ public class MyStepdefs extends Utils {
            Assert.assertTrue(actualQuantity.contains(sylvaniaLEDQty));
 
            actualPrice = driver.findElement(By.xpath("//div[@class=\"orderlinesContainer\"]/div/table/tbody/tr[4]/td[5]/div")).getText();
-           Assert.assertTrue(actualPrice.contains("£28.60"));
+           Assert.assertTrue(actualPrice.contains(String.valueOf(Float.valueOf(price)* Float.valueOf(sylvaniaLEDQty))));
 
 
         }
@@ -299,7 +291,9 @@ public class MyStepdefs extends Utils {
         // Write code here that turns the phrase above into concrete actions
         this.harwinQty = harwinQty;
         this.harwinRSNumber = harwinRSNumber;
-        batteriesPage.enterHarwinBatteryHolderQty(harwinQty);
+        batteriesPage.findProductLocator(harwinRSNumber);
+        price = batteriesPage.productPrice();
+        batteriesPage.enterProductQty(harwinQty);
     }
 
 
@@ -307,13 +301,13 @@ public class MyStepdefs extends Utils {
     @And("^clicks HARWIN Battery Holder Quantity Add button$")
     public void clicksHARWINBatteryHolderQuantityAddButton()  {
         // Write code here that turns the phrase above into concrete actions
-        batteriesPage.clickHarwinBatteryHolderQty();
+        batteriesPage.clickAddQtyButton();
     }
 
     @And("^clicks HARWIN Battery Holder View Basket$")
     public void clicksHARWINBatteryHolderViewBasket()  {
         // Write code here that turns the phrase above into concrete actions
-        batteriesPage.clickViewBasketHarwinBatteryHolder();
+        batteriesPage.clickViewBasket();
     }
 
     @And("^user should see that same Battery Holders are added in basket$")
@@ -324,7 +318,8 @@ public class MyStepdefs extends Utils {
         actualQuantity = driver.findElement(By.xpath("//table[@class=\"cartTable\"]/tbody/tr[3]/td[3]/input")).getAttribute("value");
         Assert.assertTrue(actualQuantity.contains(harwinQty));
         actualPrice = driver.findElement(By.xpath("//table[@class=\"cartTable\"]/tbody/tr[3]/td[5]/div")).getText();
-        Assert.assertTrue(actualPrice.contains("£8.52"));
+
+        Assert.assertTrue(actualPrice.contains(String.valueOf(Float.valueOf(price)* Float.valueOf(harwinQty))));
     }
 
     @And("^should see all order details HARWIN Battery Holder$")
@@ -352,7 +347,7 @@ public class MyStepdefs extends Utils {
         Assert.assertTrue(actualQuantity.contains(harwinQty));
 
         actualPrice = driver.findElement(By.xpath("//div[@class=\"orderlinesContainer\"]/div/table/tbody/tr[4]/td[5]/div")).getText();
-        Assert.assertTrue(actualPrice.contains("£8.52"));
+        Assert.assertTrue(actualPrice.contains(String.valueOf(Float.valueOf(price)* Float.valueOf(harwinQty))));
 
     }
 

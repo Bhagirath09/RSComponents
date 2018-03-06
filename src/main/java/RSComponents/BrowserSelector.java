@@ -18,7 +18,7 @@ public class BrowserSelector extends Utils {
         else if (browser.equalsIgnoreCase("chrome"))
         {
             //chromedriver-2.35 version
-            System.setProperty("webdriver.ie.driver", "C:\\Soft\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Soft\\chromedriver-2.35.exe");
             driver = new ChromeDriver();
         }
         else if (browser.equalsIgnoreCase("ie"))
